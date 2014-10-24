@@ -42,3 +42,5 @@ while m.length > 3
 	mMin = m.each.with_index.find_all{ |a,i| a == m.min }.map{ |a,b| b }
 	m.delete_at(mMin[0])
 end
+
+puts `vagrant snapshot list #{vmName}`
