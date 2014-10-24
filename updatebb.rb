@@ -23,3 +23,22 @@ when 'continuously'
 end
 
 File.write(bzinfo, doc.to_xml)
+
+# Will bring up the Backblaze Control Panel GUI and if it does
+# close it and reopen it, this will refresh the update we did to
+# bzinfo.xml file
+
+require 'win32ole'
+
+bz = "C:/Program Files (x86)/Backblaze/bzbui.exe"
+
+`"#{bz}"`
+
+wsh = WIN32OLE.new('Wscript.Shell')
+
+if wsh.AppActivate('Backblaze Control Panel')
+	sleep(1)
+	wsh.SendKeys('%{F4}')
+	sleep(1)
+	`"#{bz}"`
+end
